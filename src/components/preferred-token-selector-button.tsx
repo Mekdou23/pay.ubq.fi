@@ -27,13 +27,15 @@ export function PreferredTokenSelectorButton({ chainId, onPreferenceChange }: Pr
     const storedPreference = localStorage.getItem(LOCAL_STORAGE_KEY) as Address | null;
     if (storedPreference && availableTokens.some((token) => token.address.toLowerCase() === storedPreference.toLowerCase())) {
       setCurrentPreference(storedPreference);
+      onPreferenceChange(storedPreference);
     } else {
       setCurrentPreference(null);
       if (storedPreference) {
         localStorage.removeItem(LOCAL_STORAGE_KEY);
       }
+      onPreferenceChange(null);
     }
-  }, [availableTokens]);
+  }, [availableTokens, onPreferenceChange]);
 
   // Effect to handle clicks outside the dropdown using capture phase
   useEffect(() => {

@@ -240,10 +240,10 @@ export function DashboardPage() {
     setIsTableVisible((prev) => !prev);
   };
 
-  const handlePreferenceChange = (selectedAddress: Address | null) => {
+  const handlePreferenceChange = useCallback((selectedAddress: Address | null) => {
     setPreferredRewardTokenAddress(selectedAddress);
     console.log("DashboardPage received preference change:", selectedAddress);
-  };
+  }, []);
 
   const claimPermits = useCallback(
     async (permitsToClaim: PermitData[]) => {
